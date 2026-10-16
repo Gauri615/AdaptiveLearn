@@ -1,0 +1,3 @@
+import {describe,it,expect} from 'vitest'; import request from 'supertest'; import jwt from 'jsonwebtoken';
+process.env.JWT_ACCESS_SECRET='test-access-secret'; process.env.NODE_ENV='test'; const app=(await import('./server.js')).default;
+describe('protected API authorization',()=>{it('rejects an anonymous profile request',async()=>{const r=await request(app).get('/api/auth/me');expect(r.status).toBe(401)});it('rejects a student from trainer-only users endpoint before database access',async()=>{const token=jwt.sign({id:'student',role:'student',email:'student@example.test',fullName:'Student'},process.env.JWT_ACCESS_SECRET!,{expiresIn:'1h'});const r=await request(app).get('/api/users').set('Cookie',`al_access=${token}`);expect(r.status).toBe(403)});});
