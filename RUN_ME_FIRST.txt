@@ -1,0 +1,31 @@
+ADAPTIX AI — QUICK START (WINDOWS + XAMPP)
+
+1. Install Node.js 20+.
+2. Open XAMPP and click Start beside MySQL.
+3. Open http://localhost/phpmyadmin
+4. Import backend/sql/schema.sql, then backend/sql/migrations/001_java_assessment.sql 002_contests_discussions.sql, and 003_adaptix_mastery_engine.sql in order.
+5. Open PowerShell in this folder.
+6. Run: Copy-Item backend/.env.example backend/.env
+7. Run: npm install
+8. Run: npm install --prefix backend
+9. Run: npm install --prefix frontend
+10. Start Docker Desktop in Linux-container mode.
+11. Build: docker build -t adaptix-java-sandbox:17 -f backend\executor\Dockerfile backend\executor
+12. Set JAVA_EXECUTION_ENABLED=true in backend\.env.
+13. Run: npm run seed
+14. Run: npm run dev
+15. Open http://localhost:5173
+16. Sign in as Trainer to create a Java question with public and hidden tests.
+17. In Trainer cockpit, create a contest with the published question.
+18. Sign in as Student to run public samples, submit solutions, join contests, and use challenge discussions.
+19. Copy, cut, paste, clipboard shortcuts, and context menus are blocked in the app interface; this is not a security boundary.
+
+DEMO ACCOUNTS
+Student A: student@adaptix.dev / Student@123
+Student B: student2@adaptix.dev / Student2@123
+Trainer:   trainer@adaptix.dev / Trainer@123
+
+If your XAMPP MySQL uses a different port/password, edit backend/.env first.
+
+IMPORTANT EXECUTION LIMITATION
+Java execution is fail-closed. It is not operational until Docker Desktop is running, the sandbox image exists, and JAVA_EXECUTION_ENABLED=true. Confirm /api/health reports javaExecution.operational=true before describing Java execution as available. Student code runs in bounded no-network containers and never in the API process. Demo users and demo scores are synthetic.

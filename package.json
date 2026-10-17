@@ -1,0 +1,14 @@
+{
+  "name": "adaptix-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ADAPTIX AI — adaptive learning and assessment portal prototype for XAMPP MySQL",
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "seed": "npm run seed --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}
