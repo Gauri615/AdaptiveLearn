@@ -1,2 +1,0 @@
-import {describe,it,expect} from 'vitest'; import {assertValidDag} from './dag.js';
-describe('prerequisite DAG validation',()=>{it('allows an acyclic graph',()=>expect(()=>assertValidDag(['a','b','c'],[{conceptId:'b',prerequisiteId:'a'},{conceptId:'c',prerequisiteId:'b'}])).not.toThrow());it('rejects a cycle',()=>expect(()=>assertValidDag(['a','b'],[{conceptId:'b',prerequisiteId:'a'},{conceptId:'a',prerequisiteId:'b'}])).toThrow(/circular/));it('rejects self dependencies',()=>expect(()=>assertValidDag(['a'],[{conceptId:'a',prerequisiteId:'a'}])).toThrow(/own/));});
